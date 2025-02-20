@@ -6,9 +6,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "num run build && ./scripts/deploy"
   },
   "dependencies": {
-    "astro": "^5.3.0"
+    "astro": "^5.3.0",
+    "s3-upload-custom-resource-lambda-layer": "^1.2.0"
   }
 }
