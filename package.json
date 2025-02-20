@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "num run build && ./scripts/deploy"
+    "deploy": "npm run build && ./scripts/deploy"
   },
   "dependencies": {
     "astro": "^5.3.0",
