@@ -33,9 +33,9 @@ cloudfront_distribution_id="$(aws cloudformation describe-stack-resource \
 cloudfront_invalidation_id="$(
     aws cloudfront create-invalidation \
         --distribution-id "${cloudfront_distribution_id}" \
-        --paths "/*"
-    --query "Invalidation.Id"
-    --output text
+        --paths "/*" \
+        --query "Invalidation.Id" \
+        --output text
 )"
 
 aws cloudfront wait invalidation-completed \
