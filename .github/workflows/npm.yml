@@ -20,7 +20,6 @@ jobs:
       - name: Full Build
         run: |
           npm ci
-Deploy_via_GitHub_to_AWS_via_FederatedOIDC
           npm run build
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4.1.0
