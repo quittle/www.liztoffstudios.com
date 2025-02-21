@@ -4,7 +4,7 @@ set -o pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
-export AWS_DEFAULT_REGION=us-east-1
+export AWS_DEFAULT_REGION="${AWS_REGION:=us-east-1}"
 
 generated_template="/tmp/liztoffstudios.com-generated-cloudformation.json"
 
