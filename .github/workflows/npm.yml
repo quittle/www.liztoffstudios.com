@@ -1,0 +1,35 @@
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: NVM Install
+        run: |
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+          . $HOME/.nvm/nvm.sh
+          nvm install
+      - name: Full Build
+        run: |
+          npm ci
+          npm run build
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4.1.0
+        if: github.ref == 'refs/heads/main'
+        with:
+          role-to-assume: arn:aws:iam::915290536872:role/liztoffstudios.com-deploy
+          role-session-name: Deploy_via_GitHub_to_AWS_via_FederatedOIDC
+          aws-region: us-east-1
+      - name: Deploy
+        if: github.ref == 'refs/heads/main'
+        run: npm run deploy
+  automerge:
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - uses: fastify/github-action-merge-dependabot@v3.11.0
