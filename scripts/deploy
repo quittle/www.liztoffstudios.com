@@ -23,3 +23,21 @@ aws cloudformation deploy \
     --no-fail-on-empty-changeset \
     --parameter-overrides \
     "DeploymentContentVersion=${code_uri}"
+
+cloudfront_distribution_id="$(aws cloudformation describe-stack-resource \
+    --stack-name liztoffstudios-com \
+    --logical-resource-id CloudFrontDistribution \
+    --query "StackResourceDetail.PhysicalResourceId" \
+    --output text)"
+
+cloudfront_invalidation_id="$(
+    aws cloudfront create-invalidation \
+        --distribution-id "${cloudfront_distribution_id}" \
+        --paths "/*"
+    --query "Invalidation.Id"
+    --output text
+)"
+
+aws cloudfront wait invalidation-completed \
+    --distribution-id "${cloudfront_distribution_id}" \
+    --id "${cloudfront_invalidation_id}"
