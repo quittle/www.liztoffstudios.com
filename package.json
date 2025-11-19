@@ -10,7 +10,7 @@
     "deploy": "npm run build && ./scripts/deploy"
   },
   "dependencies": {
-    "astro": "^5.3.0",
+    "astro": "^5.15.9",
     "s3-upload-custom-resource-lambda-layer": "^1.2.0"
   }
 }
