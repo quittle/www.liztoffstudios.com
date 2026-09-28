@@ -31,9 +31,3 @@ jobs:
       - name: Deploy
         if: github.ref == 'refs/heads/main'
         run: npm run deploy
-  automerge:
-    needs: build
-    runs-on: ubuntu-latest
-    if: ${{ github.actor == 'dependabot[bot]' }}
-    steps:
-      - uses: fastify/github-action-merge-dependabot@v3.11.0
