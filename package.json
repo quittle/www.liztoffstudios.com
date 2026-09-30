@@ -11,6 +11,6 @@
   },
   "dependencies": {
     "astro": "^7.3.5",
-    "s3-upload-custom-resource-lambda-layer": "^1.2.0"
+    "s3-upload-custom-resource-lambda-layer": "^1.2.3"
   }
 }
