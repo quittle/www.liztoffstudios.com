@@ -25,7 +25,7 @@ jobs:
           npm ci
           npm run build
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4.1.0
+        uses: aws-actions/configure-aws-credentials@v6.3.0
         if: github.ref == 'refs/heads/main'
         with:
           role-to-assume: arn:aws:iam::915290536872:role/liztoffstudios.com-deploy
